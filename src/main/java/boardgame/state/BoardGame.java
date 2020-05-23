@@ -50,7 +50,7 @@ public class BoardGame implements Cloneable {
         return stringBuilder.toString();
     }
 
-    public Stones[][] ClickStone(int row, int col) {
+    public void ClickStone(int row, int col) {
         Stones color = board[row][col];
         switch (color) {
             case EMPTY:
@@ -66,10 +66,10 @@ public class BoardGame implements Cloneable {
                 log.info("Stone [{}][{}] GREEN cannot be changed.", row, col);
         }
         log.info("Stone [{}][{}] {} is changed into {}.", row, col, color, board[row][col]);
-        return board;
     }
 
-    public boolean isFinished(int x, int y) {
+    public boolean isFinished(int x, int y) throws Exception {
+        try{
         int countL = 0, countR = 0, i;
         if (board[x][0] == board[x][1] && board[x][1] == board[x][2]) return true;
         if (board[0][y] == board[1][y] && board[1][y] == board[2][y]) return true;
@@ -83,9 +83,12 @@ public class BoardGame implements Cloneable {
             if (countR >= 3) return true;
         }
         return false;
+        }catch (Exception e){
+            throw new Exception(e);
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         BoardGame boardGame = new BoardGame();
         System.out.println(boardGame);
         boardGame.ClickStone(1, 1);

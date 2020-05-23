@@ -75,7 +75,7 @@ public class GameController {
         this.playerName = playerName;
     }
 
-    private int row, col;
+    public int row, col;
 
     @FXML
     public void initialize() {
@@ -90,7 +90,11 @@ public class GameController {
             if (newValue) {
                 log.info("Game is over");
                 log.debug("Saving result to database...");
-                gameResultDao.persist(createGameResult());
+                try {
+                    gameResultDao.persist(createGameResult());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 stopWatchTimeline.stop();
             }
         });
@@ -111,13 +115,13 @@ public class GameController {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 ImageView view = (ImageView) gameGrid.getChildren().get(i * 3 + j);
-                log.trace("Image({}, {}) = {}", i, j, view.getImage().getUrl());
+                log.trace("Image({}, {}) = {}", i, j, view.getImage());
                 view.setImage(stoneImages.get(gameState.getBoard()[i][j].getValue()));
             }
         }
     }
 
-    public void handleClickOnStone(MouseEvent mouseEvent) {
+    public void handleClickOnStone(MouseEvent mouseEvent) throws Exception {
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         log.debug("Stone ({}, {}) is picked", row, col);
@@ -157,7 +161,7 @@ public class GameController {
         stage.show();
     }
 
-    private GameResult createGameResult(){
+    private GameResult createGameResult() throws Exception {
         GameResult result = GameResult.builder()
                 .player(playerName)
                 .solved(gameState.isFinished(row, col))
