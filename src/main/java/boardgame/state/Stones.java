@@ -1,4 +1,4 @@
-package boardgame;
+package boardgame.state;
 
 public enum Stones {
 
@@ -11,4 +11,7 @@ public enum Stones {
         return values()[s];
     }
 
+    public int getValue() {
+        return ordinal();
+    }
 }

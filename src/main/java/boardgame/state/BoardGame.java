@@ -1,4 +1,4 @@
-package boardgame;
+package boardgame.state;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -69,27 +69,23 @@ public class BoardGame implements Cloneable {
         return board;
     }
 
-    public boolean isFinished(int x, int y) throws Exception {
-        try {
-            int countL = 0, countR = 0, i;
-            if (board[x][0] == board[x][1] && board[x][1] == board[x][2]) return true;
-            if (board[0][y] == board[1][y] && board[1][y] == board[2][y]) return true;
-            for (i = -2; i <= 2; i++) {
-                if (x + i < 0 || x + i > 2 || y + i < 0 || y + i > 2) ;
-                else {
-                    if (board[x + i][y + i] == board[x][y]) countL++;
-                    if (board[x + i][y - i] == board[x][y]) countR++;
-                }
-                if (countL >= 3) return true;
-                if (countR >= 3) return true;
+    public boolean isFinished(int x, int y) {
+        int countL = 0, countR = 0, i;
+        if (board[x][0] == board[x][1] && board[x][1] == board[x][2]) return true;
+        if (board[0][y] == board[1][y] && board[1][y] == board[2][y]) return true;
+        for (i = -2; i <= 2; i++) {
+            if (x + i < 0 || x + i > 2 || y + i < 0 || y + i > 2) ;
+            else {
+                if (board[x + i][y + i] == board[x][y]) countL++;
+                if (board[x + i][y - i] == board[x][y]) countR++;
             }
-            return false;
-        } catch (Exception e) {
-            throw new Exception(e);
+            if (countL >= 3) return true;
+            if (countR >= 3) return true;
         }
+        return false;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         BoardGame boardGame = new BoardGame();
         System.out.println(boardGame);
         boardGame.ClickStone(1, 1);
