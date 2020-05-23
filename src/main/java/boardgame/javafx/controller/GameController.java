@@ -133,21 +133,19 @@ public class GameController {
         steps.set(steps.get() + 1);
         gameState.ClickStone(row, col);
         if (gameState.isFinished()) {
+            gameOver.setValue(true);
             if (steps.get() % 2 == 1) {
-                gameOver.setValue(true);
                 log.info("Player {} has solved the game in {} steps", player1Name, steps.get());
                 messageLabel.setText("Congratulations, " + player1Name + "!");
-                resetButton.setDisable(true);
-                giveUpButton.setText("Finish");
             } else {
-                gameOver.setValue(true);
                 log.info("Player {} has solved the game in {} steps", player2Name, steps.get());
                 messageLabel.setText("Congratulations, " + player2Name + "!");
-                resetButton.setDisable(true);
-                giveUpButton.setText("Finish");
             }
-            displayGameState();
+            gameGrid.setDisable(true);
+            resetButton.setDisable(true);
+            giveUpButton.setText("Finish");
         }
+        displayGameState();
     }
 
     public void handleResetButton(ActionEvent actionEvent) {
@@ -179,14 +177,14 @@ public class GameController {
                     .player(player1Name)
                     .solved(gameState.isFinished())
                     .duration(Duration.between(startTime, Instant.now()))
-                    .steps(steps.get() / 2)
+                    .steps(steps.get())
                     .build();
         } else {
             result = GameResult.builder()
                     .player(player2Name)
                     .solved(gameState.isFinished())
                     .duration(Duration.between(startTime, Instant.now()))
-                    .steps(steps.get() / 2)
+                    .steps(steps.get())
                     .build();
         }
         return result;
