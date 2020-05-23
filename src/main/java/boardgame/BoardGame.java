@@ -49,8 +49,26 @@ public class BoardGame implements Cloneable{
         return stringBuilder.toString();
     }
 
+    public Stones[][] ClickStone(int row, int col){
+        Stones color = board[row][col];
+        switch(color){
+            case EMPTY:board[row][col]=Stones.RED;break;
+            case RED:board[row][col]=Stones.YELLOW;break;
+            case YELLOW:board[row][col]=Stones.GREEN;break;
+            case GREEN:log.info("Stone [{}][{}] GREEN cannot be changed.",row,col);
+        }
+        log.info("Stone [{}][{}] {} is change into {}.",row,col,color,board[row][col]);
+        return board;
+    }
+
+    private Stones Color(Stones color) {
+        return color;
+    }
+
     public static void main(String[] args) {
         BoardGame boardGame = new BoardGame();
+        System.out.println(boardGame);
+        boardGame.ClickStone(1,1);
         System.out.println(boardGame);
     }
 }
