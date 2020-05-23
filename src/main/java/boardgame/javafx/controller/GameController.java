@@ -75,7 +75,7 @@ public class GameController {
         this.playerName = playerName;
     }
 
-    public int row, col;
+    private int row, col;
 
     @FXML
     public void initialize() {
@@ -125,17 +125,17 @@ public class GameController {
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         log.debug("Stone ({}, {}) is picked", row, col);
-        if (!gameState.isFinished(row, col)) {
-            steps.set(steps.get() + 1);
-            gameState.ClickStone(row, col);
-            if (gameState.isFinished(row, col)) {
-                gameOver.setValue(true);
-                log.info("Player {} has solved the game in {} steps", playerName, steps.get());
-                messageLabel.setText("Congratulations, " + playerName + "!");
-                resetButton.setDisable(true);
-                giveUpButton.setText("Finish");
-            }
+        // if (!gameState.isFinished()) {
+        steps.set(steps.get() + 1);
+        gameState.ClickStone(row, col);
+        if (gameState.isFinished()) {
+            gameOver.setValue(true);
+            log.info("Player {} has solved the game in {} steps", playerName, steps.get());
+            messageLabel.setText("Congratulations, " + playerName + "!");
+            resetButton.setDisable(true);
+            giveUpButton.setText("Finish");
         }
+        //  }
         displayGameState();
     }
 
@@ -164,7 +164,7 @@ public class GameController {
     private GameResult createGameResult() throws Exception {
         GameResult result = GameResult.builder()
                 .player(playerName)
-                .solved(gameState.isFinished(row, col))
+                .solved(gameState.isFinished())
                 .duration(Duration.between(startTime, Instant.now()))
                 .steps(steps.get())
                 .build();

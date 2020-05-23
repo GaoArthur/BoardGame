@@ -68,24 +68,29 @@ public class BoardGame implements Cloneable {
         log.info("Stone [{}][{}] {} is changed into {}.", row, col, color, board[row][col]);
     }
 
-    public boolean isFinished(int x, int y) throws Exception {
-        try{
-        int countL = 0, countR = 0, i;
-        if (board[x][0] == board[x][1] && board[x][1] == board[x][2]) return true;
-        if (board[0][y] == board[1][y] && board[1][y] == board[2][y]) return true;
-        for (i = -2; i <= 2; i++) {
-            if (x + i < 0 || x + i > 2 || y + i < 0 || y + i > 2) ;
-            else {
-                if (board[x + i][y + i] == board[x][y]) countL++;
-                if (board[x + i][y - i] == board[x][y]) countR++;
-            }
-            if (countL >= 3) return true;
-            if (countR >= 3) return true;
-        }
+    public boolean isFinished() {
+        if (board[0][0] == board[0][1] && board[0][1] == board[0][2] && board[0][0] != Stones.EMPTY) return true;
+        if (board[1][0] == board[1][1] && board[1][1] == board[1][2] && board[1][0] != Stones.EMPTY) return true;
+        if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][0] != Stones.EMPTY) return true;
+        if (board[0][0] == board[1][0] && board[1][0] == board[2][0] && board[0][0] != Stones.EMPTY) return true;
+        if (board[0][1] == board[1][1] && board[1][1] == board[2][1] && board[0][1] != Stones.EMPTY) return true;
+        if (board[0][2] == board[1][2] && board[1][2] == board[2][2] && board[0][2] != Stones.EMPTY) return true;
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != Stones.EMPTY) return true;
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != Stones.EMPTY) return true;
         return false;
-        }catch (Exception e){
-            throw new Exception(e);
+    }
+
+    public BoardGame clone() {
+        BoardGame copy = null;
+        try {
+            copy = (BoardGame) super.clone();
+        } catch (CloneNotSupportedException e) {
         }
+        copy.board = new Stones[board.length][];
+        for (int i = 0; i < board.length; ++i) {
+            copy.board[i] = board[i].clone();
+        }
+        return copy;
     }
 
     public static void main(String[] args) throws Exception {
@@ -93,6 +98,6 @@ public class BoardGame implements Cloneable {
         System.out.println(boardGame);
         boardGame.ClickStone(1, 1);
         System.out.println(boardGame);
-        System.out.println(boardGame.isFinished(1, 1));
+        System.out.println(boardGame.isFinished());
     }
 }

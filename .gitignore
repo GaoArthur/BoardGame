@@ -1,6 +1,7 @@
 target/
 .idea/
 *.iml
+*.sql
 
 # Compiled class file
 *.class
