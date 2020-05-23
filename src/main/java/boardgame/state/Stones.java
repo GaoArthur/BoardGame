@@ -3,9 +3,9 @@ package boardgame.state;
 public enum Stones {
 
     EMPTY,
+    GREEN,
     RED,
-    YELLOW,
-    GREEN;
+    YELLOW;
 
     public static Stones of(int s) {
         return values()[s];

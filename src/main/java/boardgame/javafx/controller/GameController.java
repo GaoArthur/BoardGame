@@ -125,7 +125,6 @@ public class GameController {
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         log.debug("Stone ({}, {}) is picked", row, col);
-        // if (!gameState.isFinished()) {
         steps.set(steps.get() + 1);
         gameState.ClickStone(row, col);
         if (gameState.isFinished()) {
@@ -135,7 +134,6 @@ public class GameController {
             resetButton.setDisable(true);
             giveUpButton.setText("Finish");
         }
-        //  }
         displayGameState();
     }
 
