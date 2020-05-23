@@ -10,14 +10,5 @@ public enum Stones {
     public static Stones of(int s) {
         return values()[s];
     }
-    //
-    //public Stones Clicked(){
-    //    switch (this) {
-    //        case EMPTY:return RED;
-    //        case RED:return YELLOW;
-    //        case YELLOW:return GREEN;
-    //    }
-    //    throw new AssertionError();
-    //}
 
 }
