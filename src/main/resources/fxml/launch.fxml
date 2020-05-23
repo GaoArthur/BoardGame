@@ -13,9 +13,12 @@
             <Font name="MathJax_Main-Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="133.0" layoutY="238.0" text="Your name:" />
-      <TextField fx:id="playerNameTextField" layoutX="223.0" layoutY="233.0" prefHeight="26.0" prefWidth="158.0" />
-      <Button fx:id="startButton" layoutX="249.0" layoutY="287.0" mnemonicParsing="false" onAction="#startAction" prefHeight="51.0" prefWidth="105.0" text="Start game" />
+      <Label layoutX="133.0" layoutY="201.0" text="Player1" />
+      <TextField fx:id="player1NameTextField" layoutX="219.0" layoutY="195.0" prefHeight="26.0" prefWidth="158.0" />
       <Label fx:id="errorLabel" layoutX="223.0" layoutY="200.0" prefHeight="16.0" prefWidth="151.0" textFill="#e30e0e" />
+      <Label layoutX="133.0" layoutY="244.0" text="Player2" />
+      <TextField fx:id="player2NameTextField" layoutX="219.0" layoutY="239.0" prefHeight="26.0" prefWidth="158.0" />
+      <Label fx:id="errorLabel" layoutX="223.0" layoutY="244.0" prefHeight="16.0" prefWidth="151.0" textFill="#e30e0e" />
+      <Button fx:id="startButton" layoutX="249.0" layoutY="287.0" mnemonicParsing="false" onAction="#startAction" prefHeight="51.0" prefWidth="105.0" text="Start game" />
    </children>
 </Pane>

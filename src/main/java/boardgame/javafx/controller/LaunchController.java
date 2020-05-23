@@ -21,23 +21,30 @@ public class LaunchController {
     private FXMLLoader fxmlLoader;
 
     @FXML
-    private TextField playerNameTextField;
+    private TextField player1NameTextField;
+    @FXML
+    private TextField player2NameTextField;
 
     @FXML
     private Label errorLabel;
 
     public void startAction(ActionEvent actionEvent) throws IOException {
-        if (playerNameTextField.getText().isEmpty()) {
+        if (player1NameTextField.getText().isEmpty()) {
             errorLabel.setText("Enter your name!");
-        } else {
-            fxmlLoader.setLocation(getClass().getResource("/fxml/game.fxml"));
-            Parent root = fxmlLoader.load();
-            fxmlLoader.<GameController>getController().setPlayerName(playerNameTextField.getText());
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-            log.info("The players name is set to {}, loading game scene", playerNameTextField.getText());
         }
+        if (player2NameTextField.getText().isEmpty()) {
+            errorLabel.setText("Enter your name!");
+        }
+        fxmlLoader.setLocation(getClass().getResource("/fxml/game.fxml"));
+        Parent root = fxmlLoader.load();
+        fxmlLoader.<GameController>getController().setPlayer1Name(player1NameTextField.getText());
+        fxmlLoader.<GameController>getController().setPlayer2Name(player2NameTextField.getText());
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+        log.info("The player1 name is set to {}, loading game scene", player1NameTextField.getText());
+        log.info("The player2 name is set to {}, loading game scene", player2NameTextField.getText());
+
     }
 
 }

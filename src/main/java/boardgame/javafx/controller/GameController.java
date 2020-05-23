@@ -43,7 +43,8 @@ public class GameController {
     @Inject
     private GameResultDao gameResultDao;
 
-    private String playerName;
+    private String player1Name;
+    private String player2Name;
     private BoardGame gameState;
     private IntegerProperty steps = new SimpleIntegerProperty();
     private Instant startTime;
@@ -71,8 +72,12 @@ public class GameController {
 
     private BooleanProperty gameOver = new SimpleBooleanProperty();
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setPlayer1Name(String player1Name) {
+        this.player1Name = player1Name;
+    }
+
+    public void setPlayer2Name(String player2Name) {
+        this.player2Name = player2Name;
     }
 
     private int row, col;
@@ -108,7 +113,7 @@ public class GameController {
         gameOver.setValue(false);
         displayGameState();
         createStopWatch();
-        Platform.runLater(() -> messageLabel.setText("Good luck, " + playerName + "!"));
+        Platform.runLater(() -> messageLabel.setText("Good luck, " + player1Name + ", " + player2Name + "!"));
     }
 
     private void displayGameState() {
@@ -128,13 +133,21 @@ public class GameController {
         steps.set(steps.get() + 1);
         gameState.ClickStone(row, col);
         if (gameState.isFinished()) {
-            gameOver.setValue(true);
-            log.info("Player {} has solved the game in {} steps", playerName, steps.get());
-            messageLabel.setText("Congratulations, " + playerName + "!");
-            resetButton.setDisable(true);
-            giveUpButton.setText("Finish");
+            if (steps.get() % 2 == 1) {
+                gameOver.setValue(true);
+                log.info("Player {} has solved the game in {} steps", player1Name, steps.get());
+                messageLabel.setText("Congratulations, " + player1Name + "!");
+                resetButton.setDisable(true);
+                giveUpButton.setText("Finish");
+            } else {
+                gameOver.setValue(true);
+                log.info("Player {} has solved the game in {} steps", player2Name, steps.get());
+                messageLabel.setText("Congratulations, " + player2Name + "!");
+                resetButton.setDisable(true);
+                giveUpButton.setText("Finish");
+            }
+            displayGameState();
         }
-        displayGameState();
     }
 
     public void handleResetButton(ActionEvent actionEvent) {
@@ -160,12 +173,22 @@ public class GameController {
     }
 
     private GameResult createGameResult() throws Exception {
-        GameResult result = GameResult.builder()
-                .player(playerName)
-                .solved(gameState.isFinished())
-                .duration(Duration.between(startTime, Instant.now()))
-                .steps(steps.get())
-                .build();
+        GameResult result = null;
+        if (steps.get() % 2 == 1) {
+            result = GameResult.builder()
+                    .player(player1Name)
+                    .solved(gameState.isFinished())
+                    .duration(Duration.between(startTime, Instant.now()))
+                    .steps(steps.get() / 2)
+                    .build();
+        } else {
+            result = GameResult.builder()
+                    .player(player2Name)
+                    .solved(gameState.isFinished())
+                    .duration(Duration.between(startTime, Instant.now()))
+                    .steps(steps.get() / 2)
+                    .build();
+        }
         return result;
     }
 
