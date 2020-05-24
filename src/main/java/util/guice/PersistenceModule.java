@@ -12,7 +12,7 @@ public class PersistenceModule extends AbstractModule {
 
     /**
      * Create the JUnit.
-     * @param jpaUnit
+     * @param jpaUnit Junit test
      */
     public PersistenceModule(String jpaUnit) {
         this.jpaUnit = jpaUnit;

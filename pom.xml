@@ -9,8 +9,8 @@
     <version>1.0</version>
     <description>Advanced tic-tac-toe</description>
     <scm>
-        <connection>https://github.com/GaoArthur/BoardGame.git</connection>
-        <developerConnection>https://github.com/GaoArthur/BoardGame.git</developerConnection>
+        <connection>scm:git:https://github.com/GaoArthur/BoardGame.git</connection>
+        <developerConnection>scm:git:https://github.com/GaoArthur/BoardGame.git</developerConnection>
     </scm>
     <developers>
         <developer>
@@ -201,11 +201,6 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-                <configuration>
-                    <additionalJOptions>
-                        <additionalJOption>-Xdoclint:none</additionalJOption>
-                    </additionalJOptions>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

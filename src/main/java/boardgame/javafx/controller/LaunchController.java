@@ -34,7 +34,7 @@ public class LaunchController {
     /**
      * Control the Start button, start the game.
      * @param actionEvent Left click
-     * @throws IOException
+     * @throws IOException Failed or interrupted I/O operations
      */
     public void startAction(ActionEvent actionEvent) throws IOException {
         if (player1NameTextField.getText().isEmpty()) {

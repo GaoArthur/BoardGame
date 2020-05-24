@@ -147,6 +147,7 @@ public class GameController {
     /**
      * Event when click on the Stone picture.
      * @param mouseEvent Left click
+     * @throws Exception When the value out of the range
      */
     public void handleClickOnStone(MouseEvent mouseEvent) throws Exception{
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
@@ -187,7 +188,7 @@ public class GameController {
     /**
      * Control the GiveUp button, store the data and transit to next scene.
      * @param actionEvent Left click
-     * @throws IOException
+     * @throws IOException Failed or interrupted I/O operations
      */
     public void handleGiveUpButton(ActionEvent actionEvent) throws IOException {
         String buttonText = ((Button) actionEvent.getSource()).getText();

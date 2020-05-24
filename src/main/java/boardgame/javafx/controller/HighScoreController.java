@@ -105,7 +105,7 @@ public class HighScoreController {
     /**
      * Handle the restart button.
      * @param actionEvent Left click
-     * @throws IOException
+     * @throws IOException Failed or interrupted I/O operations
      */
     public void handleRestartButton(ActionEvent actionEvent) throws IOException {
         log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());

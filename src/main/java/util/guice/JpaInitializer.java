@@ -13,7 +13,7 @@ public class JpaInitializer {
 
     /**
      * Start the service.
-     * @param persistService
+     * @param persistService Management of the relational data
      */
     @Inject
     public JpaInitializer (PersistService persistService) {

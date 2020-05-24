@@ -9,7 +9,7 @@ public class Main {
 
     /**
      * launch the @para BoardGameApplication.
-     * @param args
+     * @param args argument
      */
     public static void main(String[] args) {
         Application.launch(BoardGameApplication.class, args);

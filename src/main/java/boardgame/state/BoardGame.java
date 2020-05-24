@@ -75,7 +75,7 @@ public class BoardGame implements Cloneable {
 
     /**
      * When click the stone, the stone will be change,
-     * The order is EMPTY>RED>YELLOW>GREEN, and stay at GREEN.
+     * The order is EMPTY,RED,YELLOW,GREEN, and stay at GREEN.
      * @param row the row number of the board
      * @param col the column number of the board
      */
@@ -116,7 +116,7 @@ public class BoardGame implements Cloneable {
     /**
      * A simple test whether the function above is working.
      * Detail test are in the Test folder
-     * @param args
+     * @param args Argument
      */
     public static void main(String[] args){
         BoardGame boardGame = new BoardGame();
