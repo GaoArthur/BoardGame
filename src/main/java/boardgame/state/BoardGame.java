@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardGame implements Cloneable {
 
     private Stones[][] board;
-    private int rangeX, rangeY;
 
     public static final int[][] INITIAL = {
             {0, 0, 0},
@@ -23,7 +22,7 @@ public class BoardGame implements Cloneable {
     };
 
     public BoardGame() {
-        this(R);
+        this(INITIAL);
     }
 
     private void setInitial(int[][] b) {
@@ -80,20 +79,7 @@ public class BoardGame implements Cloneable {
         return false;
     }
 
-    public BoardGame clone() {
-        BoardGame copy = null;
-        try {
-            copy = (BoardGame) super.clone();
-        } catch (CloneNotSupportedException e) {
-        }
-        copy.board = new Stones[board.length][];
-        for (int i = 0; i < board.length; ++i) {
-            copy.board[i] = board[i].clone();
-        }
-        return copy;
-    }
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         BoardGame boardGame = new BoardGame();
         System.out.println(boardGame);
         boardGame.ClickStone(1, 1);
