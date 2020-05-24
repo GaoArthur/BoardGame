@@ -45,6 +45,7 @@
             </Label>
             <Label text="Steps:" />
             <Label fx:id="stepsLabel" text="0" />
+            <Label fx:id="playerLabel" text="Player" />
          </children>
       </VBox>
    </right>

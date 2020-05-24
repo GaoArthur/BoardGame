@@ -65,6 +65,9 @@ public class GameController {
     private Timeline stopWatchTimeline;
 
     @FXML
+    private Label playerLabel;
+
+    @FXML
     private Button resetButton;
 
     @FXML
@@ -109,6 +112,7 @@ public class GameController {
     private void resetGame() {
         gameState = new BoardGame(BoardGame.INITIAL);
         steps.set(0);
+        playerLabel.setText(player1Name);
         startTime = Instant.now();
         gameOver.setValue(false);
         displayGameState();
@@ -130,6 +134,8 @@ public class GameController {
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         log.debug("Stone ({}, {}) is picked", row, col);
+        if(steps.get()%2==1)playerLabel.setText(player1Name);
+        else playerLabel.setText(player2Name);
         steps.set(steps.get() + 1);
         gameState.ClickStone(row, col);
         if (gameState.isFinished()) {
@@ -143,6 +149,7 @@ public class GameController {
             }
             gameGrid.setDisable(true);
             resetButton.setDisable(true);
+            playerLabel.setText("");
             giveUpButton.setText("Finish");
         }
         displayGameState();

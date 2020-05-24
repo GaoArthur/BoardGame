@@ -29,10 +29,12 @@ public class LaunchController {
     private Label errorLabel;
 
     public void startAction(ActionEvent actionEvent) throws IOException {
-        if (player1NameTextField.getText().isEmpty()) {
+        player1NameTextField.setText("Player1");
+        player2NameTextField.setText("Player2");
+        if (player1NameTextField.getText().equals("Player1")) {
             errorLabel.setText("Enter your name!");
         }
-        if (player2NameTextField.getText().isEmpty()) {
+        if (player2NameTextField.getText().equals("Player2")) {
             errorLabel.setText("Enter your name!");
         }
         fxmlLoader.setLocation(getClass().getResource("/fxml/game.fxml"));
