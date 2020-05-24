@@ -27,6 +27,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
 
+/**
+ * Control the HighScore scene.
+ */
 @Slf4j
 public class HighScoreController {
 
@@ -99,6 +102,11 @@ public class HighScoreController {
         highScoreTable.setItems(observableResult);
     }
 
+    /**
+     * Handle the restart button.
+     * @param actionEvent Left click
+     * @throws IOException
+     */
     public void handleRestartButton(ActionEvent actionEvent) throws IOException {
         log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
         log.info("Loading launch scene...");

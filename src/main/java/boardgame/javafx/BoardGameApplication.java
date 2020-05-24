@@ -14,6 +14,9 @@ import util.guice.PersistenceModule;
 import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * Start the BoardGame Application.
+ */
 @Slf4j
 public class BoardGameApplication extends Application {
 

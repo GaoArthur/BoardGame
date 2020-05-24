@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 import java.io.IOException;
 
+/**
+ * Control the Launch scene.
+ */
 @Slf4j
 public class LaunchController {
 
@@ -28,6 +31,11 @@ public class LaunchController {
     @FXML
     private Label errorLabel;
 
+    /**
+     * Control the Start button, start the game.
+     * @param actionEvent Left click
+     * @throws IOException
+     */
     public void startAction(ActionEvent actionEvent) throws IOException {
         if (player1NameTextField.getText().isEmpty()) {
             errorLabel.setText("Enter your name!");

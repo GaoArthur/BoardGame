@@ -34,6 +34,9 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * Control the Game scene.
+ */
 @Slf4j
 public class GameController {
 
@@ -75,16 +78,27 @@ public class GameController {
 
     private BooleanProperty gameOver = new SimpleBooleanProperty();
 
+    /**
+     * Set player1 name.
+     * @param player1Name is the name of the player1
+     */
     public void setPlayer1Name(String player1Name) {
         this.player1Name = player1Name;
     }
 
+    /**
+     * Set player2 name.
+     * @param player2Name is the name of the player2
+     */
     public void setPlayer2Name(String player2Name) {
         this.player2Name = player2Name;
     }
 
     private int row, col;
 
+    /**
+     * Initialize the Game scene.
+     */
     @FXML
     public void initialize() {
         stoneImages = List.of(
@@ -130,7 +144,11 @@ public class GameController {
         }
     }
 
-    public void handleClickOnStone(MouseEvent mouseEvent) throws Exception {
+    /**
+     * Event when click on the Stone picture.
+     * @param mouseEvent Left click
+     */
+    public void handleClickOnStone(MouseEvent mouseEvent) throws Exception{
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         log.debug("Stone ({}, {}) is picked", row, col);
@@ -155,6 +173,10 @@ public class GameController {
         displayGameState();
     }
 
+    /**
+     * Control the reset button, all status reset.
+     * @param actionEvent Left click
+     */
     public void handleResetButton(ActionEvent actionEvent) {
         log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
         log.info("Resetting game...");
@@ -162,6 +184,11 @@ public class GameController {
         resetGame();
     }
 
+    /**
+     * Control the GiveUp button, store the data and transit to next scene.
+     * @param actionEvent Left click
+     * @throws IOException
+     */
     public void handleGiveUpButton(ActionEvent actionEvent) throws IOException {
         String buttonText = ((Button) actionEvent.getSource()).getText();
         log.debug("{} is pressed", buttonText);
