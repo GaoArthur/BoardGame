@@ -78,6 +78,8 @@ public class GameController {
 
     private BooleanProperty gameOver = new SimpleBooleanProperty();
 
+    private int round = 0;
+
     /**
      * Set player1 name.
      * @param player1Name is the name of the player1
@@ -125,7 +127,7 @@ public class GameController {
 
     private void resetGame() {
         gameState = new BoardGame(BoardGame.INITIAL);
-        steps.set(0);
+        steps.set(1);
         playerLabel.setText(player1Name);
         startTime = Instant.now();
         gameOver.setValue(false);
@@ -153,13 +155,19 @@ public class GameController {
         row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
         log.debug("Stone ({}, {}) is picked", row, col);
-        if(steps.get()%2==1)playerLabel.setText(player1Name);
+        if(round==1)playerLabel.setText(player1Name);
         else playerLabel.setText(player2Name);
-        steps.set(steps.get() + 1);
+        if(round<2){
+            round++;
+        }
+        else {
+            round=0;
+            steps.set(steps.get() + 1);
+        }
         gameState.ClickStone(row, col);
         if (gameState.isFinished()) {
             gameOver.setValue(true);
-            if (steps.get() % 2 == 1) {
+            if (round == 0) {
                 log.info("Player {} has solved the game in {} steps", player1Name, steps.get());
                 messageLabel.setText("Congratulations, " + player1Name + "!");
             } else {
@@ -193,8 +201,8 @@ public class GameController {
     public void handleGiveUpButton(ActionEvent actionEvent) throws IOException {
         String buttonText = ((Button) actionEvent.getSource()).getText();
         log.debug("{} is pressed", buttonText);
-        if (buttonText.equals("Give Up")) {
-            log.info("The game has been given up");
+        if (buttonText.equals("Quit")) {
+            log.info("The game has been stopped");
         }
         gameOver.setValue(true);
         log.info("Loading high scores scene...");
@@ -207,7 +215,7 @@ public class GameController {
 
     private GameResult createGameResult() throws Exception {
         GameResult result = null;
-        if (steps.get() % 2 == 1) {
+        if (round == 0) {
             result = GameResult.builder()
                     .player(player1Name)
                     .solved(gameState.isFinished())
