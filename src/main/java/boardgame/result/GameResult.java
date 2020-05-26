@@ -24,7 +24,7 @@ public class GameResult {
     private Long id;
 
     /**
-     * The name of the player1.
+     * The name of the player.
      */
     @Column(nullable = false)
     private String player;
